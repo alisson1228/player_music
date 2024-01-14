@@ -1,0 +1,12 @@
+@use 'variables'
+
+@mixin flex-center
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: center
+
+@mixin responsive1
+    @media (max-width: 725px)
+        @content
+        

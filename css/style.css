@@ -1,0 +1,425 @@
+@keyframes autoplay1 {}
+@keyframes autoplay2 {}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: grey white;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 20px;
+  border: 3px solid white;
+}
+
+body {
+  background: linear-gradient(180deg, #101F54 0%, rgba(0, 0, 0, 0.44) 100%);
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-player {
+  backdrop-filter: blur(10px);
+  background: rgba(150, 150, 150, 0.25);
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  overflow: hidden;
+}
+@media (max-width: 725px) {
+  .main-player {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+.main-player-img {
+  height: min(40vw, 52vh);
+  aspect-ratio: 2/2;
+  background-color: white;
+  background-image: url("/img/capa/enemy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 20px;
+}
+@media (max-width: 725px) {
+  .main-player-img {
+    height: min(40vw, 40vh);
+  }
+}
+.main-player-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.main-player-controls-functions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-player-controls-functions-volum {
+  display: flex;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: 0.5s;
+  gap: 1rem;
+  border: 2px solid white;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+.main-player-controls-functions-volum:hover {
+  width: 10.5rem;
+}
+.main-player-controls-functions-volum input[type=range] {
+  height: 5px;
+  width: 7rem;
+}
+.main-player-controls-functions-volum-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+.main-player-controls-functions-volum-btn .fa-volume-high {
+  display: block;
+}
+.main-player-controls-functions-volum-btn .fa-volume-low {
+  display: none;
+}
+.main-player-controls-functions-volum-btn .fa-volume-off {
+  display: none;
+}
+.main-player-controls-functions-volum-btn .fa-volume-xmark {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.low .fa-volume-high {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.low .fa-volume-low {
+  display: block;
+}
+.main-player-controls-functions-volum-btn.low .fa-volume-off {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.low .fa-volume-xmark {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.off .fa-volume-high {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.off .fa-volume-low {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.off .fa-volume-off {
+  display: block;
+}
+.main-player-controls-functions-volum-btn.off .fa-volume-xmark {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.xmark .fa-volume-high {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.xmark .fa-volume-low {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.xmark .fa-volume-off {
+  display: none;
+}
+.main-player-controls-functions-volum-btn.xmark .fa-volume-xmark {
+  display: block;
+}
+.main-player-controls-functions-autoplay {
+  width: 3.5rem;
+  height: 1.8rem;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.main-player-controls-functions-autoplay span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  position: absolute;
+  transition: 0.5s;
+  margin: -2px -2px;
+}
+.main-player-controls-functions-autoplay span.de {
+  left: 0;
+  background: rgb(150, 150, 150);
+  color: rgb(50, 50, 50);
+}
+.main-player-controls-functions-autoplay span.li {
+  left: 1.5rem;
+  background: #fb2828;
+  color: white;
+}
+.main-player-controls-infos {
+  text-align: left;
+  width: 240px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 18px;
+  color: white;
+}
+.main-player-controls-progress {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: white;
+}
+.main-player-controls-progress-timeinfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main-player-controls-progress-prog {
+  width: 100%;
+}
+.main-player-controls-btns {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+.main-player-controls-btns .btn {
+  width: 45px;
+  height: 45px;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.315);
+  animation-duration: 0.8s;
+  background: none;
+  font-size: 20px;
+  color: white;
+}
+.main-player-controls-btns .btn:hover {
+  color: #fb2828;
+  border: 2px solid #fb2828;
+  background: rgba(255, 78, 78, 0.281);
+  box-shadow: 0px 0px 16px 0px rgba(255, 78, 78, 0.69);
+}
+.main-player-controls-btns-play.play .fa-play {
+  display: block;
+}
+.main-player-controls-btns-play.play .fa-pause {
+  display: none;
+}
+.main-player-controls-btns-play.play .fa-rotate-right {
+  display: none;
+}
+.main-player-controls-btns-play.pause .fa-play {
+  display: none;
+}
+.main-player-controls-btns-play.pause .fa-pause {
+  display: block;
+}
+.main-player-controls-btns-play.pause .fa-rotate-right {
+  display: none;
+}
+.main-player-controls-btns-play.repet .fa-play {
+  display: none;
+}
+.main-player-controls-btns-play.repet .fa-pause {
+  display: none;
+}
+.main-player-controls-btns-play.repet .fa-rotate-right {
+  display: block;
+}
+.main-player-controls-btns-loop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.main-player-controls-btns-loop i {
+  font-size: 25px;
+}
+.main-player-controls-btns-loop p {
+  position: absolute;
+}
+.main-player-controls-btns-loop.re .re {
+  display: flex;
+}
+.main-player-controls-btns-loop.re .re p {
+  font-size: 10px;
+  left: 18px;
+  top: 16px;
+}
+.main-player-controls-btns-loop.re .r1 {
+  display: none;
+}
+.main-player-controls-btns-loop.re .rn {
+  display: none;
+}
+.main-player-controls-btns-loop.r1 .re {
+  display: none;
+}
+.main-player-controls-btns-loop.r1 .r1 {
+  display: flex;
+}
+.main-player-controls-btns-loop.r1 .r1 p {
+  font-size: 10px;
+  left: 18px;
+  top: 16px;
+  font-weight: 600;
+}
+.main-player-controls-btns-loop.r1 .rn {
+  display: none;
+}
+.main-player-controls-btns-loop.rn .re {
+  display: none;
+}
+.main-player-controls-btns-loop.rn .r1 {
+  display: none;
+}
+.main-player-controls-btns-loop.rn .rn {
+  display: flex;
+}
+.main-player-controls-btns-loop.rn .rn p {
+  font-size: 30px;
+  left: 15px;
+  top: 7px;
+  font-weight: 500;
+  color: #fb2828;
+}
+.main-player-controls-btns-list.lf .la {
+  display: flex;
+}
+.main-player-controls-btns-list.lf .lf {
+  display: none;
+}
+.main-player-controls-btns-list.la .la {
+  display: none;
+}
+.main-player-controls-btns-list.la .lf {
+  display: flex;
+}
+.main-player-lister {
+  position: absolute;
+  width: 52%;
+  height: 100%;
+  background: rgba(141, 141, 141, 0.4784313725);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.8196078431);
+  margin-left: -2rem;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 1rem;
+  top: 110%;
+  transition: 0.5s;
+}
+@media (max-width: 725px) {
+  .main-player-lister {
+    height: 60%;
+    width: 100%;
+    margin: 0;
+  }
+}
+.main-player-lister.active {
+  top: 0%;
+}
+@media (max-width: 725px) {
+  .main-player-lister.active {
+    top: 40%;
+  }
+}
+.main-player-lister-fechar {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+}
+.main-player-lister-musics {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: auto;
+  padding-right: 5px;
+  margin-right: -5px;
+}
+.main-player-lister-musics-music {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: rgb(199, 196, 196);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.main-player-lister-musics-music:hover {
+  background: rgba(170, 170, 170, 0.5);
+}
+.main-player-lister-musics-music.active {
+  color: #fb2828;
+  text-shadow: 0px 0px 2px #fb2828;
+}
+.main-player-lister-musics-music-img {
+  width: 4rem;
+  height: 4rem;
+  background-image: url("/img/capa/enemy.jpg");
+  background-size: 100%;
+  border-radius: 10px;
+}
+.main-player-lister-musics-music-infos {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 6rem);
+}
+.main-player-lister-musics-music-infos .titulo {
+  font-size: 18px;
+}
+.main-player-lister-musics-music-infos .artista {
+  font-size: 15px;
+}
+.main-player-lister-musics-music-infos .time {
+  font-size: 14px;
+  align-self: flex-end;
+  line-height: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */

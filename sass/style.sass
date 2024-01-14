@@ -1,0 +1,446 @@
+@use 'variables'
+@use 'mixins'
+
+@keyframes autoplay1
+    0%
+        
+    100%
+
+@keyframes autoplay2
+    0%
+        
+    100%
+        
+
+*
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+    font-family: 'Montserrat',sans-serif
+
+/* Works on Firefox */
+*
+  scrollbar-width: thin
+  scrollbar-color: grey white
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar
+  width: 15px
+
+*::-webkit-scrollbar-track
+  background: white
+
+*::-webkit-scrollbar-thumb
+  background-color: grey
+  border-radius: 20px
+  border: 3px solid white
+
+body
+    background: linear-gradient(180deg, #101F54 0%, rgb(0 0 0 / 44%) 100%)
+    
+.main
+    width: 100%
+    height: 100vh
+    display: flex
+    justify-content: center
+    align-items: center
+
+    &-player
+        backdrop-filter: blur(10px)
+        background: rgb(150 150 150 / .25)
+        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.4)
+        border-radius: 20px 
+        padding: 2rem
+        display: flex
+        align-items: center
+        gap: 4rem
+        overflow: hidden
+
+        @include mixins.responsive1
+            flex-direction: column
+            gap: 2rem
+
+        &-img
+            height: min(40vw,52vh)
+            aspect-ratio: 2/2
+            background-color: white
+            background-image: url("/img/capa/enemy.jpg")
+            background-size: cover
+            background-repeat: no-repeat
+            background-position: center
+            border-radius: 20px
+
+            @include mixins.responsive1
+                height: min(40vw,40vh)
+
+        &-controls
+            display: flex
+            flex-direction: column
+            gap: 1rem
+
+            &-functions
+                display: flex
+                justify-content: space-between
+                align-items: center
+
+                &-volum
+                    display: flex
+                    align-items: center
+                    width: 2.5rem
+                    height: 2.5rem
+                    justify-content: space-between
+                    overflow: hidden
+                    transition: .5s
+                    gap: 1rem
+                    border: 2px solid white
+                    padding: .5rem
+                    border-radius: 20px
+
+                    &:hover
+                        width: 10.5rem
+
+                    input[type="range"]
+                        height: 5px
+                        width: 7rem
+
+                    &-btn
+                        display: flex
+                        justify-content: flex-start
+                        align-items: center
+                        background: none
+                        border: none
+                        color: white
+                        font-size: 16px
+
+                        &.high
+
+                        .fa-volume-high
+                            display: block
+
+                        .fa-volume-low
+                            display: none
+
+                        .fa-volume-off
+                            display: none
+
+                        .fa-volume-xmark
+                            display: none
+
+                        &.low
+
+                            .fa-volume-high
+                                display: none
+
+                            .fa-volume-low
+                                display: block
+
+                            .fa-volume-off
+                                display: none
+
+                            .fa-volume-xmark
+                                display: none
+
+                        &.off
+
+                            .fa-volume-high
+                                display: none
+
+                            .fa-volume-low
+                                display: none
+
+                            .fa-volume-off
+                                display: block
+
+                            .fa-volume-xmark
+                                display: none
+
+                        &.xmark
+
+                            .fa-volume-high
+                                display: none
+
+                            .fa-volume-low
+                                display: none
+
+                            .fa-volume-off
+                                display: none
+
+                            .fa-volume-xmark
+                                display: block
+
+                &-autoplay
+                    width: 3.5rem
+                    height: 1.8rem
+                    border: 2px solid white
+                    border-radius: 20px
+                    display: flex
+                    align-items: center
+                    position: relative
+
+                    span
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        background: white
+                        padding: .6rem
+                        width: 2rem
+                        height: 2rem
+                        border-radius: 50%
+                        position: absolute
+                        transition: .5s
+                        margin: -2px -2px
+                        
+                        &.de
+                            left: 0
+                            background: rgb(150, 150, 150)
+                            color: rgb(50, 50, 50)
+
+                        &.li
+                            left: 1.5rem
+                            background: #fb2828
+                            color: white
+
+
+            &-infos
+                text-align: left
+                width: 240px
+                padding-top: 15px
+                padding-bottom: 15px
+                font-size: 18px
+                color: white
+
+            &-progress
+                display: flex
+                flex-direction: column
+                width: 100%
+                color: white
+
+                &-timeinfo
+                    display: flex
+                    flex-direction: row
+                    justify-content: space-between
+
+                &-prog
+                    width: 100%
+
+            &-btns
+                display: flex
+                width: 100%
+                justify-content: center
+                gap: 1rem
+
+                .btn
+                    width: 45px
+                    height: 45px
+                    border: 2px solid white
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    border-radius: 50%
+                    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.315)
+                    animation-duration: 0.8s
+                    background: none
+                    font-size: 20px
+                    color: white
+
+                    &:hover
+                        color: #fb2828
+                        border: 2px solid #fb2828
+                        background: rgba(255, 78, 78, 0.281)
+                        box-shadow: 0px 0px 16px 0px rgb(255 78 78 / 69%)
+
+                &-play
+
+                    &.play
+                        .fa-play
+                            display: block
+
+                        .fa-pause
+                            display: none
+
+                        .fa-rotate-right
+                            display: none
+
+                    &.pause
+                        .fa-play
+                            display: none
+
+                        .fa-pause
+                            display: block
+
+                        .fa-rotate-right
+                            display: none
+
+                    &.repet
+                        .fa-play
+                            display: none
+
+                        .fa-pause
+                            display: none
+
+                        .fa-rotate-right
+                            display: block
+
+                &-loop
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    position: relative
+
+                    i
+                        font-size: 25px
+
+                    p
+                        position: absolute
+
+                    &.re
+
+                        .re
+                            display: flex
+
+                            p                            
+                                font-size: 10px
+                                left: 18px
+                                top: 16px
+
+                        .r1
+                            display: none
+
+                        .rn
+                            display: none
+
+                    &.r1
+
+                        .re
+                            display: none
+
+                        .r1
+                            display: flex
+
+                            p                            
+                                font-size: 10px
+                                left: 18px
+                                top: 16px
+                                font-weight: 600
+
+                        .rn
+                            display: none
+
+                    &.rn
+
+                        .re
+                            display: none
+
+                        .r1
+                            display: none
+
+                        .rn
+                            display: flex
+
+                            p                            
+                                font-size: 30px
+                                left: 15px
+                                top: 7px
+                                font-weight: 500
+                                color: #fb2828
+
+                &-list
+
+                    &.lf
+
+                        .la
+                            display: flex
+
+                        .lf
+                            display: none
+
+                    &.la
+
+                        .la
+                            display: none
+
+                        .lf
+                            display: flex
+
+        &-lister
+            position: absolute
+            width: 52%
+            height: 100%
+            background: #8d8d8d7a
+            backdrop-filter: blur(10px)
+            box-shadow: 0 0 12px 0 #000000d1
+            margin-left: -2rem
+            border-radius: 20px
+            padding: 2rem
+            display: flex
+            flex-direction: column
+            align-content: center
+            gap: 1rem
+            top: 110%
+            transition: .5s
+
+            @include mixins.responsive1
+                height: 60%
+                width: 100%
+                margin: 0
+
+            &.active
+                top: 0%
+
+                @include mixins.responsive1
+                    top: 40%
+
+            &-fechar
+                background: none
+                border: none
+                font-size: 20px
+                color: white
+
+            &-musics
+                display: flex
+                flex-direction: column
+                gap: 1rem
+                overflow: auto
+                padding-right: 5px
+                margin-right: -5px
+
+                &-music
+                    width: 100%
+                    height: 5rem
+                    display: flex
+                    align-items: center
+                    gap: 1rem
+                    padding: .5rem
+                    background: rgb(199 196 196)
+                    border-radius: 10px
+                    cursor: pointer
+
+                    &:hover
+                        background: rgba(170, 170, 170, .5)
+
+                    &.active 
+                        color: #fb2828
+                        text-shadow: 0px 0px 2px #fb2828
+
+                    &-img
+                        width: 4rem
+                        height: 4rem
+                        background-image: url("/img/capa/enemy.jpg")
+                        background-size: 100%
+                        border-radius: 10px
+
+                    &-infos
+                        display: flex
+                        flex-direction: column
+                        width: calc( 100% - 6rem )
+
+                        .titulo
+                            font-size: 18px
+                        
+                        .artista
+                            font-size: 15px
+
+                        .time
+                            font-size: 14px
+                            align-self: flex-end
+                            line-height: 10px
